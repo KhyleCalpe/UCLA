@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC 
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>FriendBot</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<!--FIRST PAGE and LOAD PAGE-->
+<div id="welcomeDiv" class="first_page" > Hello, I am Friendbot</div>
+<button id="begin_button" onclick="stateControl()" type = "button" class="begin_button" >Begin</button>
+<div id="loading_text" class="loading_text">Loading...</div> 
+<button id="continue_button" onclick="stateControl()" type = "button" class="continue_button" >Continue</button>
+
+<!--QUESTIONNAIRE-->
+<div id="questionnaire_home" class="questionnaire_home" > default </div>
+
+<div id="webcam" style="display: none"></div>
+
+<button id="angry_button" onclick="angryClicked()" type = "button" class="angry_button" >Angry</button>
+<button id="fear_button" onclick="afraidClicked()" type = "button" class="fear_button" >Afraid</button>
+<button id="happy_button" onclick="happyClicked()" type = "button" class="happy_button" >Happy</button>
+<button id="sad_button" onclick="sadClicked()" type = "button" class="sad_button" >Sad</button>
+
+<button id="yes_button" onclick="yesClicked()" type = "button" class="yes_button" >Yes</button>
+<button id="no_button" onclick="noClicked()" type = "button" class="no_button" >No</button>
+
+<button id="continue_q_button" onclick="stateControl()" type = "button" class="continue_q_button" >Continue</button>
+
+<button id="skip_button" onclick="skipControl()" type = "button" class="skip_button" >Skip</button>
+
+
+<form id="form" onsubmit="return false;">
+	<input   style=position:absolute;top:60%;left:41%;width:20%; type="text" id="userInput">
+	<input   style=position:absolute;top:70%;left:41%;width:20%; type="submit"    id = "submit" onclick="continue_two()">
+</form>
+
+<div id="record" class="record" > </div>
+<div id="recommmendation" class="recommendation" > </div>
+
+
+<button id="suggestion_button" onclick="suggestionClicked()" type = "button" class="suggestion_button" >Suggestion</button>
+<button id="record_button" onclick="recordClicked()" type = "button" class="record_button" >Record</button>
+<button id="restart_button" onclick="restartClicked()" type = "button" class="restart_button" >Restart</button>
+
+<script type="text/javascript" src="src/classifier.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC 
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Mini Keyboard</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="lib/jquery-ui-1.12.1.custom/jquery-ui.css">
+</head>
+<body>
+
+<div id="container">
+    <textarea id="write" style="white-space: nowrap; overflow: hidden"></textarea>
+    <ul id="keyboard">
+        <div id="slider">
+            <div id="numbers" class="ui-slider-handle"></div>
+        </div>
+        <li class="letter"><span class="off">q</span><span class="on">`</span></li>
+        <li class="letter"><span class="off">w</span><span class="on">~</span></li>
+        <li class="letter"><span class="off">e</span><span class="on">!</span></li>
+        <li class="letter"><span class="off">r</span><span class="on">@</span></li>
+        <li class="letter"><span class="off">t</span><span class="on">#</span></li>
+        <li class="letter"><span class="off">y</span><span class="on">$</span></li>
+        <li class="delete lastitem">&#x27FD;</li>
+        <li class="letter"><span class="off">u</span><span class="on">%</span></li>
+        <li class="letter"><span class="off">i</span><span class="on">^</span></li>
+        <li class="letter"><span class="off">o</span><span class="on">&amp;</span></li>
+        <li class="letter"><span class="off">p</span><span class="on">*</span></li>
+        <li class="letter"><span class="off">a</span><span class="on">(</span></li>
+        <li class="letter"><span class="off">s</span><span class="on">)</span></li>
+        <li class="letter"><span class="off">d</span><span class="on">-</span></li>
+        <li class="letter"><span class="off">f</span><span class="on">_</span></li>
+        <li class="letter"><span class="off">g</span><span class="on">=</span></li>
+        <li class="letter"><span class="off">h</span><span class="on">+</span></li>
+        <li class="letter"><span class="off">j</span><span class="on">[</span></li>
+        <li class="letter"><span class="off">k</span><span class="on">]</span></li>
+        <li class="letter"><span class="off">l</span><span class="on">{</span></li>   
+        <li class="letter"><span class="off">z</span><span class="on">}</span></li>
+        <li class="letter"><span class="off">x</span><span class="on">\</span></li>
+        <li class="letter"><span class="off">c</span><span class="on">|</span></li>
+        <li class="capslock"><span class="off">&#x21EA;</span><span class="on">&#8657;</span></li>
+        <li class="letter"><span class="off">v</span><span class="on">;</span></li>
+        <li class="letter"><span class="off">b</span><span class="on">:</span></li>
+        <li class="letter"><span class="off">n</span><span class="on">'</span></li>
+        <li class="letter"><span class="off">m</span><span class="on">"</span></li>
+        <li class="shift">&#x21e7;</li>
+        <li class="punctuation">!?...</li>
+        <li class="letter"><span class="off">,</span><span class="on">?</span></li>
+        <li class="space lastitem">&nbsp;</li>
+        <li class="letter"><span class="off">.</span><span class="on">/</span></li>
+        <li class="return lastitem">&#x21b5;</li>
+        <li class="emoji">&#x1F603</li>
+        <li class="camera">&#128247</li>
+    </ul>
+    <div id="gesture" style="display: none"></div>
+    <div id="webcam" style="display: none"></div>
+</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="lib/wz_jsgraphics.js"></script>
+<script type="text/javascript" src="lib/jquery.js"></script>
+<script type="text/javascript" src="lib/fancygestures/jquery.fancygestures.js"></script>
+<script src="lib/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script type="text/javascript" src="src/keyboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+</body>
+</html>

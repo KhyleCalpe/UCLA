@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd" >
+<html>
+<head>
+<title>jQuery Fancy Gestures | anantgarg.com</title>
+</head>
+<style>
+body {
+	background-color: #ffffff;
+	font-family: Helvetica, Arial, sans-serif;
+	text-transform: normal;
+	line-height: 1em;
+	padding:10px 0pt 0pt 30px;
+}
+
+h1 {
+	font-family:Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+	font-size:24px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:italic;
+	font-variant:normal;
+	font-weight:normal;
+	margin:0pt;
+
+}
+
+h2 {
+	padding-top: 20px;
+	font-size: 14px;
+}
+
+a {
+	color: black;
+}
+
+#outputbox {
+	font-size: 100px;
+	font-style: normal;
+	font-weight: bold;
+	color: #ff0060;
+}
+
+</style>
+<body>
+<div><h1>jQuery Fancy Gestures by Anant Garg</h1>
+<h2><a href="http://anantgarg.com/2009/05/21/jquery-fancy-gestures">Click here for documentation</a></h2>
+
+<p>Please use your mouse to draw a letter (e.g. E) in the box below. (To draw: Click and then drag your mouse)</p>
+</div>
+<div id="sample" style="border:1px solid black;position:relative;height:150px;width:150px;float:left"></div><div style="float:left"><img src="letters.jpg"></div>
+<br clear="all"/><br/><br/>
+<div id="outputbox" style="padding-top:40px;">
+
+</div>
+
+
+
+<script type="text/javascript" src="wz_jsgraphics.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.fancygestures.js"></script>
+
+<script>
+
+$(document).ready(function () {   
+	$('#sample').fancygestures(function (data) {
+		document.getElementById('outputbox').innerHTML += data;	
+	});
+});
+
+</script>
+
+</body>
+</html>
