@@ -1,0 +1,135 @@
+Implementation Description:
+
+The doubly-linked list is circular; as a result, I do not use the nullptr in any part of my code. Starting from
+construction, my constructor creates an empty sequence with an uninitialized head value, a next pointer and a 
+previous pointer that points to itself. The program uses a dummy node with head pointing to it. Despite the 
+dummy node, the size of the sequence only corresponds to the amount of nodes of interest. In the list nodes,
+the doubly-linked list contains nodes with three components: value, next, and prev.
+
+Pseudocode:
+
+1) insert()
+
+stop if position is not within bounds
+create two nodes to look and insert nodes
+	check if the pos is equal to size 
+		switch node pointers
+	else switch node pointers
+increment the size of the sequence
+
+2) insert()
+
+find a position for the value in the sequence
+insert the value at the position 
+
+3) erase
+
+check if the position is within bounds
+	check for the position
+		delete the node at the position
+
+4) remove
+
+loop through the list
+	create a tempNode
+	remove the node with the indicated value
+	increment the removedItems counter
+	decrement the size of the sequence
+	delete the tempNode
+
+5) get
+
+Check if the position is within bounds
+	Declare a pointer for traversing the list
+	Loop until the list is position is found in the list
+	Copy the value at the position
+
+6) set
+
+Check if the position is within bounds
+	Declare a pointer for traversing the list
+	Loop until the list is position is found in the list
+	Replace the value at the position with the indicated value
+
+7) find
+
+Check if the position is within bounds
+	Declare a pointer for traversing the list
+	Loop until the list is position is found in the list with the indicated value
+
+8) swap
+
+Swap the sizes
+Swap the heads of the lists
+
+9) dump
+
+Print out the list
+
+10) subsequence
+
+Check if seq2 is empty or seq2 is larger than seq1
+repeatedly
+	check for corresponding initial values
+	check if the subsequent values match
+
+11) interleave
+
+Erase a temporary sequence that corresponds to result
+Check for empty sequences
+	repeatedly
+		check if either sequence's capacity is reached
+		increment the temporary array with values 
+		increment the position of each sequence
+		increment the position in the temporary array
+
+Test cases:
+
+1
+
+#include "Sequence.h"
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+void test()
+{
+	Sequence s;
+	assert(s.insert(0, 1));
+	assert(s.insert(0, 2));
+	assert(s.insert(0, 3));
+	assert(s.insert(0, 4));
+	assert(s.insert(0, 5));
+	assert(s.size() == 5);
+	ItemType x = 999;
+	assert(s.get(0, x) && x == 5);
+	assert(s.get(1, x) && x == 4);
+}
+
+int main()
+{
+	test();
+	cout << "Passed all tests" << endl;
+}
+
+2
+
+#include "Sequence.h"
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+void test()
+{
+	Sequence s;
+	assert(s.insert(0, 1));
+	assert(s.size() == 1);
+	ItemType x = 999;
+	assert(s.get(0, x) && x == 1);
+}
+
+int main()
+{
+	test();
+	cout << "Passed all tests" << endl;
+}

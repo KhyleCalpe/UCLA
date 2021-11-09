@@ -1,0 +1,249 @@
+CS 32 Project 3 Report
+
+//////////////////////
+// GENERAL OVERVIEW //
+//////////////////////
+
+The program uses the six files to create a Well object, create Piece objects, and implement a Game object.
+The Well object defines a play area based on inputs with the '@' character on the edges to represent walls.
+Within the Well object, the Game object generates a random Piece object designed to fall on the bottom floor
+of the Well. After finalizing a piece, certain functions occur based on the piece type (i.e. PIECE_FOAM). 
+Then, the piece is deleted and poppped from the queue and a new piece enters the loop. The Game object loops 
+until the user clears a certain amount of rows of piece characters or the piece coming after the original piece 
+fails to display in the well at its initial position. Then, the game ends.
+
+////////////
+// WELL.H //
+////////////
+
+> Global constants declared in Well.h are used in both Well.cpp and Piece.cpp
+> Declaration of an incomplete Screen class type since the Well object uses a pointer to a Screen
+
+> Public functions:
+  1  Well(int width, int height);
+	~ Checks if both the width and height are reasonable
+	~ Constructs the Well object based on the width and height parameters to determine the size of the well
+	~ Uses a dynamic array to allow for width and height modification
+		
+  2  ~Well();
+	~ Destructs the Well object
+	~ Loops and deletes the pointer values, then the pointers
+
+  3  char* accessWellItem(int x, int y);
+	~ Returns a pointer to a character in the well at row y, col x
+
+  4  int   accessHeight();
+	~ Returns the well's height
+	
+  5  void  display(Screen& screen, int x, int y);
+	
+	~ Displays the entire well (includes both walls and spaces)
+
+  6  void  displayContents(Screen& screen);
+	
+	~ Displays the well's contents (without walls)
+
+  7  void  clearContents(Screen& screen);
+
+	~ Clears the well's '#' characters
+		
+  8  void  clearWell(Screen& screen);
+
+	~ Clears the well of any character != ' '
+  
+  9  bool  isRowFilled(int y);
+	
+	~ Returns a boolean based on a row's contents at row y
+	
+  10 void  clearRowFilled(int& score, int& rowsLeft);
+
+	~ Clears filled rows, drops the well down, and modifies score and rowsLeft
+		
+  11 void  dropDown(int y);
+	~ Drops the well's elements down by one row
+	
+///////////
+// PIECE //
+///////////
+
+> Public Functions:
+  1  Piece(Screen& screen, Well& well);
+	~ Constructs a Piece object
+
+  2  virtual ~Piece();
+	~ Destructs a Piece object
+	~ Declared virtual because this allows for the derived class's destructor to be called
+
+  3  void move();
+	~ Clears pieces('#') in the well
+	~ Transcribes the piece's bounding box into the well
+	~ Displays the well's contents
+
+  4  void skip();
+	~ keep moving down while space is available
+
+  5  bool moveLeft();
+	~ Checks the left-most components of the piece and checks if space is available for all components
+	~ If so, decrement the piece's x position and return true. Otherwise, return false
+
+  6  bool moveRight();
+	~ Checks the right-most components of the piece and checks if space is available for all components
+	~ If so, increment the piece's x position and return true. Otherwise, return false
+
+  7  bool moveDown();
+	~ Checks the bottom components of the piece and checks if space is available for all components
+	~ If so, increment the piece's y position and return true. Otherwise, return false
+
+  8  bool canMove(char ch);
+	~ Returns true if a character is '#' or ' '. Otherwise, return false
+
+  9  void rotate(); 
+	~ Change the orientation of the piece via by changing the bounding box; then, display the changes
+
+  10 bool canRotate();
+	~ Compares the next orientation of the piece and the well's components. If, for all peice components,
+	  the well's contents are ' ', then return true; 
+
+  11 void doRotate();
+	~ Set the bounding box to the next orientation
+
+  12 bool canDisplayPiece();
+	~ Checks if the piece at its initial position collides with any component in the well
+
+  13 void setPieceType(PieceType pt);
+	~ Sets the pieceType of the piece to pt
+
+  14 void setPiece(char piece[PIECE_HEIGHT][PIECE_WIDTH]);
+	~ Fill the bounding box for the current piece
+
+  15 void setBoxes(char piece[PIECE_HEIGHT][PIECE_WIDTH], int orientation);
+	~ Fill the bounding boxes for the piece's orientations
+
+  16 void transcribe();
+	~ Sets a block in the wall based on the piece's components and the position of the top-left corner of the piece
+
+  17 void displayXY(int x, int y);
+	~ Sets a block into specific coordinates in the Screen
+	~ Useful for displaying the next piece available in the queue
+
+  18 virtual void finishPiece();
+	~ Changes the piece's components to '$'
+
+  19 virtual void vaporize(Well& well);
+	~ Do nothing
+	~ Declared virtual so the PIECE_VAPOR can overload the function
+
+  20 virtual void fillEmptySpaces(Well& well, int i, int j);
+	~ Do nothing
+	~ Declared virtual so the PIECE_FOAM can overload the function
+
+  21 PieceType accessPieceType();
+	~ Return the pieceType
+
+  22 Well* accessWell();
+	~ return the well pointer
+
+  23 int accessX();
+	~ return the left-most x coordinate
+
+  24 int accessY();
+	~ return the top-most y coordinate
+
+////////////////////////////////////
+// PIECE: Derived Class Functions //
+////////////////////////////////////
+
+> PIECE_VAPOR
+  1 Piece_VAPOR::Piece_VAPOR(Screen& screen, Well& well)
+	~ Constructs a PIECE_VAPOR object
+	~ Sets the pieceType
+	~ Sets the piece bounding box
+	~ Sets the 4 orientation bounding boxes
+
+  2 Piece_VAPOR::~Piece_VAPOR()
+	~ Destructs a PIECE_VAPOR object
+
+  3 bool Piece_VAPOR::canVaporize(char ch)
+	~ Returns true if ch is equal to '$' or '*'
+
+  4 void Piece_VAPOR::vaporize(Well& well)
+	~ Check if the rows being vaporized are within bounds
+	~ Sets the well elements 2 rows above and below the piece's row to ' '
+	
+> PIECE_FOAM
+  1 Piece_FOAM::Piece_FOAM(Screen& screen, Well& well)
+	~ Constructs a PIECE_FOAM object
+	~ Sets the pieceType
+	~ Sets the piece bounding box
+	~ Sets the 4 orientation bounding boxes
+
+
+  2 Piece_FOAM::~Piece_FOAM()
+	~ Destructs the PIECE_FOAM object
+
+  3 bool Piece_FOAM::canFill(char ch)
+	~ Returns true if ch is equal to ' ' to '#'
+
+  4 void Piece_FOAM::finishPiece()
+	~ Overload the finishPiece() function
+	~ Set the piece's characters to '*'
+
+  5 void Piece_FOAM::fillEmptySpaces(Well & well, int i, int j)
+	~ Check if j is within bounds
+	~ Recursively check for EMPTY spaces and occupy them
+	~ Set the initial position to '*'
+
+//////////
+// GAME //
+//////////
+	
+  1 Game(int width, int height);
+	~ Construct a Game object
+		
+  2 void play();
+	~ Display the status of the game and wait for the user to enter the ENTER key
+	~ Loop infinitely to play the game as many times as possible until loss
+	~ Upon winning a round, update the game status to reflect a higher level
+	~ Upon losing a round, display GAME OVER! and wait for Enter
+
+
+  3 bool playOneLevel();
+	~ Push two Piece objects into a queue
+	~ Display the game status into the screen
+	~ Play the round while the user still needs rows to clear
+	~ For each movement down, set a timer loop that restarts upon elapsing
+	~ Break out of the loop if the user inputs ' ' or the timer runs out
+	~ Check for user input and reflect the input by moving the piece
+	~ Upon colliding with the floor of the well or a piece, set the pieces to '$'
+	~ If the piece is a special piece, implement its special function
+	~ Delete the current piece, display the next piece, and restart the timer
+	~ Display the next piece outside of the well
+	~ If the user clears the required amount of rows, return true
+
+  4 void displayPrompt(std::string s);
+	~ Clear the current line
+	~ Display a string
+
+  5 void displayStatus();
+	~ Display the score, rows left to clear, and level
+
+  6 void pushRandomPiece(PieceType pt);
+	~ Choose a random piece type
+	~ Push the piece type into the queue
+
+  7 void clearNextPiece();
+	~ Clear a portion of screen to show the next piece in the queue
+
+///////////////////////////////
+// ASSUMPTIONS AND DECISIONS //
+///////////////////////////////
+
+1 - I generalized the functionality of the pieces as much as possible
+2 - I created virtual functions that do nothing until overloaded by a derived class
+3 - I used a 2D dynamic array to ensure the flexibility of the well's width and height
+4 - I used simple switch statements for certains functions in the code that could have
+    been implemented with a linked list
+5 - I used a queue to see the front and back pieces
+6 - I chose to have 5 bounding boxes that stored the piece and its orientations
+7 - I chose to hardcode the pieces in the derived class constructors
+8 - In the case of a loss, the next piece does not show up on the well

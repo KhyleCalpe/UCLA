@@ -1,0 +1,75 @@
+CS 32 Project 4 Report
+
+Data structure for the hash map
+
+The data structure for my hash map contains an array of node pointers.
+Each node pointer contains a pointer to the next node and a string value.
+Upon construction, each of the node pointers are assigned to null pointers.
+Additionally, upon construction of each node, the next pointer of each node 
+will also be set to null pointers. To ensure the uniqueness of each word and
+its anagrams, the hash map uses prime numbers to determine the hash keys.
+
+|[0]| -> next -> ... -> nullptr
+|[1]| -> next -> ... -> nullptr
+|[2]| -> next -> ... -> nullptr
+|[3]| -> next -> ... -> nullptr
+  .
+  .
+  .
+|[n]| -> next -> ... -> nullptr
+
+Psuedocode for non-trivial algorithms
+
+hashFoo ~ converts the hash key to an index
+
+...
+	remove non-letters from the word being passed in
+	set the word's characters to lower case
+	convert the word's characters to integers and get the product
+	return the remainder of the prodcut divided by the size of the hash map
+
+toInt ~ gets the hash key of a word
+
+...
+	convert the word's characters to integers
+	return the product of the integers
+
+insert ~ inserts a word into the hash map
+
+...
+	remove non-letters from the word being passed in
+	set the word's characters to lower case
+
+	use the hash function to get the index in the hash map
+
+	initialize a new node pointer with a node pointer with a corresponding index
+
+	if the new node pointer is a null pointer
+		initialize the new node and change the hash map's bucket's elements in the index
+	else
+		initialize a temporary node pointer 
+		set the temporary node's next pointer to point to the new node's next pointer
+		set the new node's next pointer to point to the temporary node pointer
+
+lookup ~ prints out the anagrams of the word
+
+...
+	remove non-letters from the word being passed in
+	set the word's characters to lower case
+
+	if the string being passed in is empty
+		don't do anything
+
+	while the current node pointer is not a null pointer
+		if the hash key of the current node's string value is 
+		equal to the hash key of the string value being passed in
+			print out the anagrams of the word being passed in
+			set the current node pointer to the next node pointer
+		else
+			set the current node pointer to the next node pointer
+
+Problems:
+
+g32 shows direct and indirect leaks after program compilation.
+g32 shows warnings about the intialization of the Node pointer
+during and after -Wreorder.
