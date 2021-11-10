@@ -1,6 +1,6 @@
 # UCLA
 
-This repository contains all of my coding projects at UCLA.
+This repository contains my coding projects at UCLA.
 
 * CS 32     - Data Structures & Algorithms
 * ECE 113D  - Digital Signal Processing Design
