@@ -5,8 +5,8 @@
 #include <PubSubClient.h>
 #include "BLEDevice.h"
 
-#define WIFISSID "ATT566" // Put your WifiSSID here
-#define PASSWORD "2745383874" // Put your wifi password here
+#define WIFISSID "EXAMPLE_NAME" // Put your WifiSSID here
+#define PASSWORD "EXAMPLE_PASSWORD" // Put your wifi password here
 #define TOKEN "BBFF-XTVNYGlwTanmJM5Kgnl4NnVgJlBfDG" // Put your Ubidots' TOKEN
 #define MQTT_CLIENT_NAME "034533150679" // MQTT client Name, please enter your own 8-12 alphanumeric character ASCII string; 
                                            //it should be a random and unique ascii string and different from all other devices
