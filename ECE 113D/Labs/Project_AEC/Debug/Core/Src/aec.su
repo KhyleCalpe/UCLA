@@ -1,0 +1,6 @@
+aec.c:42:7:prewhiten_x	24	static
+aec.c:53:7:prewhiten_e	24	static
+aec.c:64:7:bandpass	32	static
+aec.c:77:6:dtd	24	static
+aec.c:92:7:nlms	56	static
+aec.c:125:6:aec	40	static

@@ -1,0 +1,3 @@
+echo.c:3:6:echo	40	static
+echo.c:28:6:setSeed	16	static
+echo.c:34:7:randFloat	24	static
